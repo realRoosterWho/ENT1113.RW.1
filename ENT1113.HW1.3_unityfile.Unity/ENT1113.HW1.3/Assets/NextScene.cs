@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class nextScene : MonoBehaviour
+public class NextScene : MonoBehaviour
 {
     
     public string scenename;
@@ -15,7 +15,9 @@ public class nextScene : MonoBehaviour
         Debug.Log("Collision");
         if (other.gameObject.CompareTag("Player"))
         {
+            GameManager.Instance.LevelChange++;
             SceneManager.LoadScene(scenename);
+            Debug.Log(GameManager.Instance.LevelChange);
         }
     }
 }
