@@ -20,15 +20,16 @@ public class MonosingletonTemp<T> : MonoBehaviour where T : MonosingletonTemp<T>
 
     void Awake()
     {
+
         if (_instance == null)
         {
             _instance = this as T;
+            DontDestroyOnLoad(this.gameObject);
         }
-        else
+        else if (_instance != this)
         {
-            Destroy(_instance);
+            Destroy(this.gameObject);
         }
 
-        DontDestroyOnLoad(_instance);
     }
 }

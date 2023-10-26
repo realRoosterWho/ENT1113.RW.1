@@ -8,6 +8,7 @@ public class GameInit : MonoBehaviour
     void Awake()
     {
         GameManager.Instance.Init();
+        SoundManager.Instance.Init();
     }
     // Start is called before the first frame update
     void Start()

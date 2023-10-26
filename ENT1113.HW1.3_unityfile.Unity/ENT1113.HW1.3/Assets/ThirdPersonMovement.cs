@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ThirdPersonMovement : MonoBehaviour
 
@@ -13,10 +14,15 @@ public class ThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     
+    public AudioClip footstepSound;
+    public AudioClip backgroundMusic;
+    public AudioMixerGroup mixer;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        //播放bgm
+        SoundManager.Instance.PlayMusic(backgroundMusic);
     }
 
     // Update is called once per frame
@@ -40,6 +46,17 @@ public class ThirdPersonMovement : MonoBehaviour
                 
         Vector3 gravityVector = Vector3.down * gravity * Time.deltaTime;
         controller.Move(gravityVector);
+        
+        //footsteps
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            SoundManager.Instance.EnableSFX(footstepSound, mixer);
+        }
+        else
+        {
+            SoundManager.Instance.DisableSFX();
+        }
+
 
         
         
