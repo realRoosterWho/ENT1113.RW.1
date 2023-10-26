@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Video;
 
 public class SoundManager : MonosingletonTemp<SoundManager>
 {
@@ -13,37 +15,37 @@ public class SoundManager : MonosingletonTemp<SoundManager>
     {
         Debug.Log("SoundManager Init");
     }
-    void PlayMusic(AudioClip clip)
+    public void PlayMusic(AudioClip clip)
     {
         musicSource.clip = clip;
+        musicSource.volume = 0.3f;
         musicSource.Play();
     }
     
-    void EnableSFX(AudioClip clip)
+    public void EnableSFX(AudioClip clip, AudioMixerGroup mixer)
     {
         sfxSource.clip = clip;
+        sfxSource.outputAudioMixerGroup = mixer;
+        // 如果在播放，什么都不做，否则播放
+        if (sfxSource.isPlaying)
+        {
+            return;
+        }
+        sfxSource.Play();
         sfxSource.enabled = true;
     }
     
-    void DisableSFX()
+    public void DisableSFX()
     {
         sfxSource.enabled = false;
     }
 
     private void Start()
     {
-        PlayMusic(musicSource.clip);
     }
 
     private void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            EnableSFX(sfxSource.clip);
-        }
-        else
-        {
-            DisableSFX();
-        }
+
     }
 }

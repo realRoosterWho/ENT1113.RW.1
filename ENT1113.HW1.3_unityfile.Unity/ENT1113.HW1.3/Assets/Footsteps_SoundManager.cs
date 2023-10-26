@@ -9,14 +9,7 @@ public class Footsteps_SoundManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            footstepSound.enabled = true;
-        }
-        else
-        {
-            footstepSound.enabled = false;
-        }
+    
 
 
     }
