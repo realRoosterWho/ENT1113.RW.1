@@ -1,5 +1,5 @@
 # ENT1113.HW1.3
 Character Move System
-
-Homework 1 compeleted.
+Music and Scene Manager
+HW3 handled
 =======
